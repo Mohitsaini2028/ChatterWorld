@@ -36,11 +36,13 @@ const socket = io()
 let nm; //name
 let textarea = document.querySelector('#textarea');
 let messageArea = document.querySelector('.message__area');
-
+let color;
 
 
 do{
     nm = prompt('Please enter your name: ')
+    var colors = ['#fe1d22', '#220ef2', '#d31815', ,'#989c30','#a8ad03', '#9c6430', '#563790', '#d98f07' ,'#17d6a6','#cd66b9', '#42f2f5','#65d688', '#3a8c81', '#dbaacc', '#4f6a36', '#99134d'];
+    color = colors[Math.floor(Math.random() * colors.length)];   
 }while(!nm)
 
 function sendMessage(message){
@@ -51,7 +53,8 @@ function sendMessage(message){
     let msg = {
         user: nm,
         time: time,
-        message: message.trim()
+        message: message.trim(),
+        colour: color
     }
     //Append the message
     appendMessage(msg, 'outgoing');
@@ -73,8 +76,8 @@ function appendMessage(msg, type){
     <h4>${msg.user} - ${msg.time}</h4>
     <p>${msg.message}</p>
     `;
-
-    
+    if(type=="incoming")
+      mainDiv.style.backgroundColor = msg.colour;
     mainDiv.innerHTML = markup;
     
     // console.log(mainDiv.innerHTML);
