@@ -36,7 +36,7 @@ section.chat__section{
     margin-left: 20px
 }
 
-brand p{
+.brand p{
     min-width: 50px;
 }
 
@@ -78,6 +78,10 @@ textarea{
     background: #e1e1e1;
     color: #444645;
     margin-left: auto;
+}
+
+.outgoing p{
+    min-width: 50px;
 }
 
 .message h4{
