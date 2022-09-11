@@ -69,6 +69,15 @@ textarea{
     position: relative;
 }
 
+
+.joined_message{
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 35px;
+    max-width: 50px;
+    position: relative;
+}
+
 .incoming{
     background: #56b7f4;
     color: #ffffff;
@@ -78,6 +87,11 @@ textarea{
     background: #e1e1e1;
     color: #444645;
     margin-left: auto;
+}
+
+.joined{
+    background: #444645;
+    color: wheat;
 }
 
 .outgoing p{

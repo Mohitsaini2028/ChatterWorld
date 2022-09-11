@@ -42,7 +42,8 @@ let color;
 do{
     nm = prompt('Please enter your name: ')
     var colors = ['#fe1d22', '#220ef2', '#d31815', ,'#989c30','#a8ad03', '#9c6430', '#563790', '#d98f07' ,'#17d6a6','#cd66b9', '#42f2f5','#65d688', '#3a8c81', '#dbaacc', '#4f6a36', '#99134d'];
-    color = colors[Math.floor(Math.random() * colors.length)];   
+    color = colors[Math.floor(Math.random() * colors.length)]; 
+    socket.emit('user_connected',nm); 
 }while(!nm)
 
 function sendMessage(message){
@@ -85,6 +86,19 @@ function appendMessage(msg, type){
     messageArea.appendChild(mainDiv);
 }
 
+function user_joined(username){
+  let mainDiv = document.createElement('div');
+  let className = "joined";
+  mainDiv.classList.add(className, 'joined_message');
+
+  let markup = `
+  <p>${username} joined</p>`;
+
+  mainDiv.innerHTML = markup;
+  messageArea.appendChild(mainDiv);
+
+}
+
 textarea.addEventListener('keyup', (e) => {
     if(e.key === 'Enter'){
         sendMessage(e.target.value);
@@ -101,6 +115,12 @@ socket.on('message', (msg)=>{
     console.log('client side mssg receive',msg);
     appendMessage(msg,'incoming');
     scrollToBottom();
+})
+
+socket.on('joined', (username)=>{
+  console.log('user joined');
+  user_joined(username);
+  scrollToBottom();
 })
 
 

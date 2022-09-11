@@ -26,10 +26,18 @@ app.get('/', (req, res) => {
                             // server name - on which server socket have to work - here we have to work on http server
 const io = require('socket.io')(http)
 
+var users = [];
+
 // io.listen(+process.env.PORT);
 
 io.on('connection', (socket) => {
     console.log('Connected....');
+    
+    socket.on("user_connected", (username)=> {
+        console.log("user connected");
+        users[username] = socket.id;
+        socket.broadcast.emit('joined', username); 
+    })
 
     // listening event message
     socket.on('message', (msg)=>{
